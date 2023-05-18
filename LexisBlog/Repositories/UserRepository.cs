@@ -12,9 +12,9 @@ public class UserRepository
         {
             var settings = config.GetSection("MongoDbSettings").Get<MongoSettings>();
 
-            var clientSettings = MongoClientSettings.FromConnectionString(settings.ConnectionString);
+            var clientSettings = MongoClientSettings.FromConnectionString(settings?.ConnectionString);
             var mongoClient = new MongoClient(clientSettings);
-            var database = mongoClient.GetDatabase(settings.DatabaseName);
+            var database = mongoClient.GetDatabase(settings?.DatabaseName);
 
             _userCollection = database.GetCollection<User>("Users");
         }

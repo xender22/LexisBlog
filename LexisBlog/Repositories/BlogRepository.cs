@@ -13,9 +13,9 @@ public class BlogRepository
     {
         var settings = config.GetSection("MongoDbSettings").Get<MongoSettings>();
 
-        var clientSettings = MongoClientSettings.FromConnectionString(settings.ConnectionString);
+        var clientSettings = MongoClientSettings.FromConnectionString(settings?.ConnectionString);
         var mongoClient = new MongoClient(clientSettings);
-        var database = mongoClient.GetDatabase(settings.DatabaseName);
+        var database = mongoClient.GetDatabase(settings?.DatabaseName);
 
         _blogCollection = database.GetCollection<Blog>("Blogs");
         _userCollection = database.GetCollection<User>("Users");
